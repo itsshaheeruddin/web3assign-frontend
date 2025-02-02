@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
 
   const fetchCartData = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/cart/${userId}`);
+      const res = await fetch(`https://web3assign-backend.vercel.app/cart/${userId}`);
       const data = await res.json();
       setCart({ products: data.cart?.products || [], total: data.total || 0 });
     } catch (err) {
@@ -23,7 +23,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('http://localhost:8000/products');
+        const res = await fetch('https://web3assign-backend.vercel.app/products');
         const data = await res.json();
         setProducts(data);
         await fetchCartData();
@@ -38,7 +38,7 @@ export const CartProvider = ({ children }) => {
   const addToCart = async (productId) => {
     try {
       setIsMutating(true);
-      await fetch('http://localhost:8000/cart', {
+      await fetch('https://web3assign-backend.vercel.app/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, productId, quantity: 1 }),
@@ -54,7 +54,7 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = async (productId, quantity) => {
     try {
       setIsMutating(true);
-      await fetch('http://localhost:8000/cart', {
+      await fetch('https://web3assign-backend.vercel.app/cart', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, productId, quantity }),
@@ -70,7 +70,7 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = async (productId) => {
     try {
       setIsMutating(true);
-      await fetch('http://localhost:8000/cart', {
+      await fetch('https://web3assign-backend.vercel.app/cart', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, productId }),
